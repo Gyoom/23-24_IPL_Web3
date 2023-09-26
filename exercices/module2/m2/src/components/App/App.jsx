@@ -4,11 +4,12 @@ import Display from "components/Display/Display"
 
 
 const App = () => {
-  const [ counter, setCounter ] = useState(0)
+  const [ counter, setCounter ] = useState(JSON.parse(localStorage.getItem("counter")))
 
   const handleClick = (e) => { 
       var newCount = parseInt(e.target.dataset.delta)
       setCounter(counter + newCount)
+      localStorage.setItem("counter", JSON.stringify(counter + newCount))
   }
 
   return (
