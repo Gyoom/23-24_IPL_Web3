@@ -1,9 +1,7 @@
 const Total = ({parts}) => {
   const sumWithInitial = parts.reduce((s, p) => {
-    return s[p.exercises] + p.exercises
+    return s + p.exercises
   }, 0);
-
-  
 
   return (
     <p>{sumWithInitial}</p>
