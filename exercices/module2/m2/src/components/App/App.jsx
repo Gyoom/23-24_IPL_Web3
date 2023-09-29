@@ -7,27 +7,24 @@ const App = () => {
   const [ counter, setCounter ] = useState(JSON.parse(localStorage.getItem("counter")))
 
   const handleClick = (e) => { 
-      var newCount = parseInt(e.target.dataset.delta)
-      setCounter(counter + newCount)
-      localStorage.setItem("counter", JSON.stringify(counter + newCount))
+      setCounter(e)
+      localStorage.setItem("counter", JSON.stringify(e))
   }
 
   return (
     <div>
       <Display counter={counter}/>
       <Button
-        clickFunction={handleClick}
-        delta={1}
+        clickFunction={() => handleClick(counter + 1)}
         text='plus'
       />
+      
       <Button
-        clickFunction={handleClick}
-        delta={-counter}
+        clickFunction={() => handleClick(0)}
         text='zero'
       />     
       <Button
-        clickFunction={handleClick}
-        delta={-1}
+        clickFunction={() => handleClick(counter - 1)}
         text='minus'
       />           
     </div>
