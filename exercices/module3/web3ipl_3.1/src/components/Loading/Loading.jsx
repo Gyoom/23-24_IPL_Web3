@@ -1,4 +1,6 @@
 import { useState } from "react"
+
+
 const Loading = () => {
   const [ loading, setLoading ] = useState(true);
 
@@ -15,9 +17,7 @@ const Loading = () => {
       if (loading) {
         timer()
         return (
-        <>
-        <p>Chargement en cours</p>
-        </>
+          <p>Chargement en cours</p>
         )
       } else {
         return (
