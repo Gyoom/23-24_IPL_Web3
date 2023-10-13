@@ -15,7 +15,7 @@ const ViewForm = () =>
     }
 
     return (
-        <>
+        <div>
                 <input 
                     type="text"
                     onChange={handleText}
@@ -23,7 +23,7 @@ const ViewForm = () =>
                     placeholder='add a new Opinion ...'
                     ></input>
                 <button type="submit" onClick={() => handleClick()}>Add opinion</button>
-        </>
+        </div>
     )
 }
 

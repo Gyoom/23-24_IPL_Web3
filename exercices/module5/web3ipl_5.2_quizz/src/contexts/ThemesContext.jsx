@@ -4,34 +4,64 @@ const Context = React.createContext(null)
 
     
 const ProviderWrapper = (props) => {
-    const [ theme, setTheme ] = useState(
-        {
-            backgroundColor, 
-            primaryTextColor,
-            secondaryTextColor,
-            linkColor,
-        });
+    const [ themes, setThemes ] = useState(
+        [
+            {
+                name : "Dark Theme",
+                palette : 
+                {
+                    backgroundColor: "black", 
+                    color: "white",
+                    secondaryTextColor: "232D3F",
+                    linkColor: "#232D3F",
+                }
+                
+            },
+            {
+                name : "Light Theme", 
+                palette : 
+                {
+                    backgroundColor: "white", 
+                    color: "black",
+                    secondaryTextColor: "#000000",
+                    linkColor: "#0000ff",
+                }
+            },
+            {
+                name : "Toogle Theme", 
+                palette : 
+                {
+                    backgroundColor: "#808080", 
+                    color: "#000000",
+                    secondaryTextColor: "#000000",
+                    linkColor: "#ff0000",
+                }
+            }
+        ]);
+    
+    const [ actualTheme, setActualTheme ] = useState("Light Theme");  
 
     const setDarkTheme = () => {
-        document.setDarkTheme()
+        setActualTheme("Dark Theme")
     }
 
     const setLightTheme = () => {
-
+        setActualTheme("Light Theme")
     }
 
-    const toggleTheme = () => {
-        
+    const setToggleTheme = () => {
+        setActualTheme("Toogle Theme")
     }
 
     const  getCurrentThemeDetails = () => {
-        return theme;
+        return themes.find(t => t.name === actualTheme).palette
     }
     
     const exposedValue = {
+        themes,
         setDarkTheme,
         setLightTheme,
-        toggleTheme,
+        setToggleTheme,
         getCurrentThemeDetails
     }
     

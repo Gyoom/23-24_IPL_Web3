@@ -6,11 +6,11 @@ const Views = () => {
     const { views } = useContext(ViewsContext)
 
     return (
-        <>
+        <div>
             <ul>
                 { views.map(v => <View key={v.uuid} view={v} />)}
             </ul>
-        </>
+        </div>
     )
 
 } 
