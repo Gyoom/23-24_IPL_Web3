@@ -16,6 +16,7 @@ const ProviderWrapper = (props) => {
         else 
         {
             newCounter = {
+                
                 good: 0,
                 ok: 0,
                 bad: 0
