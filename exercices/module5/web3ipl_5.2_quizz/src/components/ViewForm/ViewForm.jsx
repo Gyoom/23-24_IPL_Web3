@@ -1,5 +1,5 @@
 import React, { useContext, useState } from "react"
-import { Context as ViewsContext } from "contexts/CounterContext"
+import { Context as ViewsContext } from "contexts/ViewsContext"
 
 const ViewForm = () => 
 {
@@ -16,7 +16,6 @@ const ViewForm = () =>
 
     return (
         <>
-            <form>
                 <input 
                     type="text"
                     onChange={handleText}
@@ -24,7 +23,6 @@ const ViewForm = () =>
                     placeholder='add a new Opinion ...'
                     ></input>
                 <button type="submit" onClick={() => handleClick()}>Add opinion</button>
-            </form>
         </>
     )
 }

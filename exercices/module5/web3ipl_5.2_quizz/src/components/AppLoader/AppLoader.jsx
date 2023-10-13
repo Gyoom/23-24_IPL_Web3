@@ -1,11 +1,14 @@
-import { ProviderWrapper as CounterProviderWrapper } from "contexts/CounterContext.jsx";
+import { ProviderWrapper as CounterProviderWrapper } from "contexts/ViewsContext.jsx";
+import { ProviderWrapper as ThemeProviderWrapper } from "contexts/ViewsContext.jsx";
 import App from "components/App/App.jsx";
 
 const AppLoader = () => {
   return (
-    <CounterProviderWrapper>
-        <App />
-    </CounterProviderWrapper>
+    <ThemeProviderWrapper>
+        <CounterProviderWrapper>
+            <App />
+        </CounterProviderWrapper>
+    </ThemeProviderWrapper>
   )
 }
 

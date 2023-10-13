@@ -1,5 +1,5 @@
 import React, { useContext } from "react"
-import { Context as ViewsContext } from "contexts/CounterContext"
+import { Context as ViewsContext } from "contexts/ViewsContext"
 import View from "components/Button/View"
 
 const Views = () => {
