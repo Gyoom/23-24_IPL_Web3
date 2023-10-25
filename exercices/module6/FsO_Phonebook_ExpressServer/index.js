@@ -6,7 +6,12 @@ const app = express()
 // midleware : effectuent une opération sur la requête avant la prise en mais des gestionnaires d'API
 app.use(express.json()) 
 app.use(cors())
-app.use(morgan(':method :url :status :res[content-length] - :response-time ms'))
+
+morgan.token('body', req => { // Associe la valeur de req.body avec un mot clé morgan
+  return JSON.stringify(req.body)
+})
+
+app.use(morgan('[:date[clf]] [:referrer] :method :url :status :res[content-length] :response-time ms :body'))
 
 // var whitelist = ['http://127.0.0.1:5173', ]
 // var corsOptions = {
