@@ -1,4 +1,4 @@
-const Footer = () => (
+const FooterPage = () => (
     <div>
       Anecdote app for <a href='https://fullstackopen.com/'>Full Stack Open</a>.
   
@@ -6,4 +6,4 @@ const Footer = () => (
     </div>
 )
 
-export default Footer
+export default FooterPage

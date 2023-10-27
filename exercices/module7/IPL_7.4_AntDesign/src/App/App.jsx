@@ -1,30 +1,24 @@
 import { useState, useEffect } from 'react'
-import { useNavigate } from 'react-router-dom'
-import Menu from '../Menu/Menu'
-import Footer from '../Footer/Footer'
-import { Layout, Space } from 'antd';
-const { Header, Footer, Sider, Content } = Layout;
+import { useNavigate, Link, Route, Routes, useMatch } from 'react-router-dom'
+import { Layout, message } from 'antd'
+import AnecdoteList from '../AnecdoteList/AnecdoteList'
+import About from '../About/About'
+import NewAnecdote from '../NewAnecdote/NewAnecdote'
+import Anecdote from '../Anecdote/Anecdote'
+import FooterPage from '../FooterPage/FooterPage'
+
+const { Header, Footer, Content } = Layout;
 
 const headerStyle = {
-  textAlign: 'center',
   color: '#fff',
-  height: 64,
-  paddingInline: 50,
-  lineHeight: '64px',
   backgroundColor: '#7dbcea',
+  
+  height: 100
 };
 const contentStyle = {
-  textAlign: 'center',
-  minHeight: 120,
-  lineHeight: '120px',
   color: '#fff',
   backgroundColor: '#108ee9',
-};
-const siderStyle = {
-  textAlign: 'center',
-  lineHeight: '120px',
-  color: '#fff',
-  backgroundColor: '#3ba0e9',
+  padding: 50
 };
 const footerStyle = {
   textAlign: 'center',
@@ -50,47 +44,57 @@ const App = () => {
       votes: 0,
       id: 2
     }
-   ])
+  ])
+  const [messageApi, contextHolder] = message.useMessage();
 
-  const [notification, setNotification] = useState('')
-
-  const hook = () => {
-
-    setTimeout(notification != '' ? setNotification('') : null, 5000)
+  const padding = {
+    paddingRight: 10,
+    color: '#fff',
   }
 
-  useEffect(hook, [notification])
+  // const hook = () => {
+
+  //   setTimeout(notification != '' ? setNotification('') : null, 5000)
+  // }
+
+  // useEffect(hook, [notification])
 
 
   const addNew = (anecdote) => {
     anecdote.id = Math.round(Math.random() * 10000)
     setAnecdotes(anecdotes.concat(anecdote))
-    setNotification('A new Anecdote added : ' + anecdote.content)
+    messageApi.open({
+      type: 'success',
+      content: 'A new Anecdote added : ' + anecdote.content,
+    })
     navigate('/')
   }
 
-  const anecdoteById = (id) =>
-    anecdotes.find(a => a.id === id)
-
-  const vote = (id) => {
-    const anecdote = anecdoteById(id)
-
-    const voted = {
-      ...anecdote,
-      votes: anecdote.votes + 1
-    }
-
-    setAnecdotes(anecdotes.map(a => a.id === id ? voted : a))
-  }
+  const match = useMatch('/anecdote/:id')
+    const anecdote = match 
+        ? anecdotes.find(anecdote => anecdote.id === Number(match.params.id))
+        : null
 
   return (
     <Layout>
-      <Header style={headerStyle}><h1>Software anecdotes</h1></Header>
-      <Content style={contentStyle}>      
-          <Menu anecdotes={anecdotes} addNew={addNew}/>
-          <h3>{notification}</h3>
+      <Header style={headerStyle}>
+          <h1 style={{height:10}}>Software anecdotes</h1>
+          <div>
+            <Link style={padding} to={'/'}>Anecdotes</Link>
+            <Link style={padding} to={'/newAnecdote'}>Create new</Link>
+            <Link style={padding} to={'/about'}>About</Link>
+          </div>
+      </Header>
+      <Content style={contentStyle}> 
+          {contextHolder}     
+          <Routes>
+            <Route path="/" element={<AnecdoteList anecdotes={anecdotes} />} />
+            <Route path="/newAnecdote" element={<NewAnecdote addNew={addNew} />} />
+            <Route path="/anecdote/:id" element={<Anecdote anecdote={anecdote} />} />
+            <Route path="/about" element={<About />} />
+          </Routes>
       </Content>
-      <Footer style={footerStyle}><Footer /></Footer>
+      <Footer style={footerStyle}><FooterPage /></Footer>
     </Layout>
   )
 }
